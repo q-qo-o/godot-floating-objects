@@ -1,0 +1,104 @@
+[gd_scene format=3 uid="uid://cdqty1irkqbyo"]
+
+[ext_resource type="PackedScene" uid="uid://b2xq2h0qsxacd" path="res://water_surface.tscn" id="1_2wrb3"]
+[ext_resource type="Script" uid="uid://cqinag22lx26r" path="res://buoyancy_mesh.gd" id="2_2wrb3"]
+[ext_resource type="Script" uid="uid://o4erdqp1c0nb" path="res://camera_switcher.gd" id="3_camsw"]
+[ext_resource type="Script" path="res://smooth_follow_camera.gd" id="4_smooth"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bc14h"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_2wrb3"]
+sky_material = SubResource("ProceduralSkyMaterial_bc14h")
+
+[sub_resource type="Environment" id="Environment_sb270"]
+background_mode = 2
+sky = SubResource("Sky_2wrb3")
+tonemap_mode = 2
+glow_enabled = true
+fog_enabled = true
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_bc14h"]
+friction = 2.0
+bounce = 0.6
+
+[sub_resource type="BoxMesh" id="BoxMesh_sb270"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_m0qqn"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_ball"]
+radius = 0.5
+height = 1.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ball"]
+radius = 0.5
+
+[node name="Node3D" type="Node3D" unique_id=984737108]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=277153916]
+transform = Transform3D(-0.56128913, -0.7167398, 0.41380984, 2.7805946e-08, 0.49999994, 0.86602545, -0.8276198, 0.48609066, -0.28064457, 0, 6.007102, -17.610012)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=549545839]
+environment = SubResource("Environment_sb270")
+
+[node name="RigidBody3D1" type="RigidBody3D" parent="." unique_id=1712144201 node_paths=PackedStringArray("water_surface_node")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.348297, 3, 2.5511546)
+mass = 600.0
+physics_material_override = SubResource("PhysicsMaterial_bc14h")
+center_of_mass_mode = 1
+center_of_mass = Vector3(0, -0.1, 0)
+script = ExtResource("2_2wrb3")
+water_surface_node = NodePath("../WaterSurface")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D1" unique_id=1326824491]
+mesh = SubResource("BoxMesh_sb270")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D1" unique_id=1729883526]
+shape = SubResource("BoxShape3D_m0qqn")
+
+[node name="RigidBody3D2" type="RigidBody3D" parent="." unique_id=1075001694 node_paths=PackedStringArray("water_surface_node")]
+transform = Transform3D(0.7221346, -0.41778085, -0.5513445, 0.69175255, 0.43612993, 0.5755598, 0, -0.7970256, 0.6039455, 12.2905245, 3, 0)
+mass = 600.0
+physics_material_override = SubResource("PhysicsMaterial_bc14h")
+center_of_mass_mode = 1
+center_of_mass = Vector3(0, -0.1, 0)
+script = ExtResource("2_2wrb3")
+water_surface_node = NodePath("../WaterSurface")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D2" unique_id=1769050931]
+mesh = SubResource("BoxMesh_sb270")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D2" unique_id=1657128506]
+shape = SubResource("BoxShape3D_m0qqn")
+
+[node name="FloatingBall" type="RigidBody3D" parent="." unique_id=1712144202 node_paths=PackedStringArray("water_surface_node")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+mass = 261.8
+physics_material_override = SubResource("PhysicsMaterial_bc14h")
+script = ExtResource("2_2wrb3")
+water_surface_node = NodePath("../WaterSurface")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="FloatingBall" unique_id=1326824492]
+mesh = SubResource("SphereMesh_ball")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FloatingBall" unique_id=1729883527]
+shape = SubResource("SphereShape3D_ball")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1669685769]
+transform = Transform3D(0.72539836, -0.45110402, 0.51990616, 2.9802319e-08, 0.75531614, 0.6553607, -0.68832934, -0.47539753, 0.5479051, 12.832778, 11.320335, 10.245611)
+
+[node name="WaterSurface" parent="." unique_id=401924017 instance=ExtResource("1_2wrb3")]
+
+[node name="FollowCamera" type="Camera3D" parent="." node_paths=PackedStringArray("target")]
+script = ExtResource("4_smooth")
+target = NodePath("../RigidBody3D1")
+offset = Vector3(0, 3.5, 6)
+smoothness = 0.2
+always_look_at_target = true
+look_at_height_offset = 0.5
+
+[node name="CameraSwitcher" type="Node" parent="." unique_id=1164167233 node_paths=PackedStringArray("cameras")]
+script = ExtResource("3_camsw")
+cameras = [NodePath("../Camera3D"), NodePath("../FollowCamera")]
