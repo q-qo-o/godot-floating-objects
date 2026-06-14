@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://b2xq2h0qsxacd"]
 
-[ext_resource type="Script" path="res://water_surface.gd" id="Script_wq1jx"]
+[ext_resource type="Script" path="res://scripts/water/water_surface.gd" id="Script_wq1jx"]
 
 [sub_resource type="Shader" id="Shader_wq1jx"]
 code = "// Procedural noise-based water shader with interaction ripples
