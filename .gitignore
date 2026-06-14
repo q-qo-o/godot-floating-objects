@@ -27,6 +27,9 @@ export.cfg
 .claude/
 .vscode/
 .idea/
+CLAUDE.md
+.editorconfig
+.gitattributes
 
 # OS metadata
 .DS_Store
