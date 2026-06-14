@@ -1,6 +1,34 @@
-# Godot 4+ specific ignores
+# Godot generated files
 .godot/
-/android/
+.import/
+export.cfg
 
-# Claude Code local settings
-.claude/settings.local.json
+# Local/exported builds
+/android/
+/build/
+/builds/
+/dist/
+/exports/
+*.apk
+*.aab
+*.exe
+*.pck
+*.zip
+
+# Logs and temporary files
+*.log
+*.tmp
+*.temp
+*.bak
+*.swp
+*~
+
+# Local editor/AI settings
+.claude/
+.vscode/
+.idea/
+
+# OS metadata
+.DS_Store
+Thumbs.db
+desktop.ini
