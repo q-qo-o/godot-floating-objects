@@ -1,6 +1,6 @@
 extends MeshInstance3D
 
-const MAX_RIPPLES := 48
+const MAX_RIPPLES := 32
 const RIPPLE_DURATION := 4.0
 const WAKE_INTERVAL := 0.15
 
@@ -29,7 +29,7 @@ func _on_body_entered(body: Node3D) -> void:
 		speed = body.linear_velocity.length()
 	elif body is CharacterBody3D:
 		speed = body.velocity.length()
-	var intensity := clampf(speed * 0.12, 0.15, 3.0)
+	var intensity := clampf(speed * 0.06, 0.08, 1.5)
 	_add_ripple(body.global_position, intensity)
 
 
@@ -96,7 +96,7 @@ func _process(_delta: float) -> void:
 		timer += _delta
 
 		if dist > 0.03 and timer >= WAKE_INTERVAL:
-			var intensity := clampf(horizontal_speed * 0.08, 0.08, 1.5)
+			var intensity := clampf(horizontal_speed * 0.04, 0.04, 0.8)
 			_add_ripple(body.global_position, intensity)
 			_floater_wake_timer[body] = 0.0
 		else:

@@ -15,9 +15,14 @@ run/main_scene="uid://cdqty1irkqbyo"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://assets/icons/icon.svg"
 
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+
 [dotnet]
 
-project/assembly_name="1st-project"
+project/assembly_name="FloatingObjects"
 
 [physics]
 

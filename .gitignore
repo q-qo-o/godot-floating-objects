@@ -9,6 +9,7 @@ export.cfg
 /builds/
 /dist/
 /exports/
+/output/
 *.apk
 *.aab
 *.exe

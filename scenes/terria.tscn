@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://cdqty1irkqbyo"]
 
 [ext_resource type="PackedScene" uid="uid://b2xq2h0qsxacd" path="res://scenes/water_surface.tscn" id="1_2wrb3"]
-[ext_resource type="Script" uid="uid://cqinag22lx26r" path="res://scripts/buoyancy/buoyancy_mesh.gd" id="2_2wrb3"]
-[ext_resource type="Script" uid="uid://o4erdqp1c0nb" path="res://scripts/camera/camera_switcher.gd" id="3_camsw"]
-[ext_resource type="Script" path="res://scripts/camera/smooth_follow_camera.gd" id="4_smooth"]
+[ext_resource type="Script" path="res://scripts/Buoyancy/BuoyancyMesh.cs" id="2_2wrb3"]
+[ext_resource type="Script" path="res://scripts/Camera/CameraSwitcher.cs" id="3_camsw"]
+[ext_resource type="Script" path="res://scripts/Camera/SmoothFollowCamera.cs" id="4_smooth"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bc14h"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
